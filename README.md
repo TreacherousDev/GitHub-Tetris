@@ -1,5 +1,5 @@
 # GitHub-Tetris
-GitHub Tetris is a Browser Extension that lets you play Tnake on your GitHub Contribution Graph  
+GitHub Tetris is a Browser Extension that lets you play Tetris on your GitHub Contribution Graph  
 
 
 ## How to Play
