@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "GitHub Tetris Game",
+  "version": "0.1.0",
+  "description": "Play Tetris on your GitHub contribution graph.",
+  "permissions": [
+    "activeTab",
+    "notifications"
+  ],
+  "background": {
+    "scripts": ["extension-activate.js"]
+  },
+  "browser_action": {
+    "default_title": "Play",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  }
+}
