@@ -118,7 +118,7 @@ const clearTetromino = () => {
 
 // Function to check and clear full columns, then move the stack left
 const clearFullColumns = () => {
-  for (let x = 0; x < 52; x++) {
+  for (let x = -1; x < 52; x++) { // Cause why not? This is the easiest adjustment of scanning to the left change there is... - SolarPH
     // Check if the column is full (all cells in the column are filled)
     const isFullColumn = contributionArray.every(row => row[x] && row[x].getAttribute('data-level') !== '0');
     
