@@ -18,7 +18,7 @@ To start a new game, simply refresh the browser page and rerun the extension.
 ___
 ## Building from Source
 ### For Firefox
-1. Clone the repo or download as zip and unpack.
+1. Download the latest zip from [releases](https://github.com/TreacherousDev/GitHub-Tetris/releases) and unpack.
 2. Open Firefox and go to `about:debugging#/runtime/this-firefox`
 3. Click on `Load Temporary Add-On`
 4. Select the `manifest.json` that is included in the downloaded folder
@@ -28,7 +28,7 @@ ___
 ### For Chromium
 Chrome Web Store demands that I pay them 5$ to publish my add-on. Hell no.  
 With that said, here is how to build it yourself:
-1. Clone the repo or download as zip and unpack.
+1. Download the latest zip from [releases](https://github.com/TreacherousDev/GitHub-Tetris/releases) and unpack.
 2. Open your Chromium web browser and click on `Extensions` tab
 3. Enable `Developer Mode`
 4. Click on `Load Unpacked`
