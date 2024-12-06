@@ -306,15 +306,28 @@ const moveTetrominoVertically = (direction) => {
 
 // Add event listeners for vertical movement keys
 document.addEventListener('keydown', (event) => {
+  event.preventDefault(); // Removes the default keyboard actions from the page.
+  // NOTE: There would be no way to restore default keyboard actions other than refreshing the page
+  
   if (gameOver) return;
-
-  switch (event.key.toLowerCase()) {
+  
+  let input = event.key
+  // Convert only letters to lowercase for case-insensitive comparison, Ignores non-letter key actions
+  if (input.length === 1 && /[a-zA-Z]/.test(input))
+  {
+	  input = input.toLowerCase();
+  }
+  
+  switch (input) {
+	case 'ArrowUp':
     case 't':
       moveTetrominoVertically('up'); // Move up
       break;
+	case 'ArrowDown':
     case 'g':
       moveTetrominoVertically('down'); // Move down
       break;
+	case 'ArrowLeft':
     case 'x':
       dropTetrominoLeft(); // Trigger instant left drop
       break;

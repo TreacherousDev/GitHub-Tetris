@@ -118,7 +118,7 @@ const clearTetromino = () => {
 
 // Function to check and clear full columns, then move the stack left
 const clearFullColumns = () => {
-  for (let x = -1; x < 52; x++) { // Cause why not? This is the easiest adjustment of scanning to the left change there is... - SolarPH
+  for (let x = 0; x < 52; x++) {
     // Check if the column is full (all cells in the column are filled)
     const isFullColumn = contributionArray.every(row => row[x] && row[x].getAttribute('data-level') !== '0');
     
@@ -306,15 +306,28 @@ const moveTetrominoVertically = (direction) => {
 
 // Add event listeners for vertical movement keys
 document.addEventListener('keydown', (event) => {
+  event.preventDefault(); // Removes the default keyboard actions from the page.
+  // NOTE: There would be no way to restore default keyboard actions other than refreshing the page
+  
   if (gameOver) return;
-
-  switch (event.key.toLowerCase()) {
+  
+  let input = event.key
+  // Convert only letters to lowercase for case-insensitive comparison, Ignores non-letter key actions
+  if (input.length === 1 && /[a-zA-Z]/.test(input))
+  {
+	  input = input.toLowerCase();
+  }
+  
+  switch (input) {
+	case 'ArrowUp':
     case 't':
       moveTetrominoVertically('up'); // Move up
       break;
+	case 'ArrowDown':
     case 'g':
       moveTetrominoVertically('down'); // Move down
       break;
+	case 'ArrowLeft':
     case 'x':
       dropTetrominoLeft(); // Trigger instant left drop
       break;
