@@ -1,5 +1,5 @@
 # GitHub-Tetris
-![12061-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/a8352e99-5010-466a-a1ec-0e6a59cbea10)  
+![2024-12-0709-48-27-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/67c6fa9c-8185-443e-9eac-8243e6da53bf)  
 GitHub Tetris is a Browser Extension that lets you play Tetris on your GitHub Contribution Graph.  
 Get this now for Firefox from the [Mozilla Extension Marketplace](https://addons.mozilla.org/en-US/firefox/addon/github-tetris-game/)
 
