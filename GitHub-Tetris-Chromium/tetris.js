@@ -116,43 +116,96 @@ const clearTetromino = () => {
   });
 };
 
-// Function to check and clear full columns, then move the stack left
+
+
+// Variable to track how many columns need to be shifted left
+let shiftCount = 0;
+
+// Function to clear full columns with flashing effect
 const clearFullColumns = () => {
-  for (let x = -1; x < 52; x++) { // Cause why not? This is the easiest adjustment of scanning to the left change there is... - SolarPH
+  // Reset shiftCount
+  shiftCount = 0;
+
+  // Array to store the indices of full columns
+  const fullColumns = [];
+
+  // Loop through each column (index 0 to 51, 52 columns total)
+  for (let x = -1; x < 52; x++) { // IDK why but -1 works and 0 doesn't
     // Check if the column is full (all cells in the column are filled)
-    const isFullColumn = contributionArray.every(row => row[x] && row[x].getAttribute('data-level') !== '0');
+    const isFullColumn = contributionArray.every(row => row[x]?.getAttribute('data-level') === '2');
     
     if (isFullColumn) {
-      // Clear the full column
-      contributionArray.forEach(row => {
-        const tile = row[x];
-        if (tile) {
-          tile.setAttribute('data-level', '0');
-        }
-      });
-      
-      // Shift all columns to the left starting from the cleared column
-      shiftColumnsLeft(x);
+      fullColumns.push(x);
+      shiftCount++;
     }
   }
+
+  if (shiftCount === 0) return; // No columns to clear
+
+  // Flash full columns before clearing
+  flashColumns(fullColumns);
 };
 
-// Function to shift all columns leftwards after a column is cleared
-const shiftColumnsLeft = (clearedColumnIndex) => {
-  // Loop through each column starting from the cleared column
-  for (let x = clearedColumnIndex; x < 51; x++) {
+// Function to flash multiple columns twice
+const flashColumns = (columns) => {
+  let flashCount = 0;
+
+  const flashInterval = setInterval(() => {
+    // Toggle flashing for all full columns
+    columns.forEach(x => {
+      contributionArray.forEach(row => {
+        const tile = row[x];
+        if (tile && tile.getAttribute('data-level') === '2') {
+          tile.setAttribute('data-level', '1'); // Set to flash state
+        } else if (tile && tile.getAttribute('data-level') === '1') {
+          tile.setAttribute('data-level', '2'); // Restore original state
+        }
+      });
+    });
+
+    flashCount++;
+
+    // After flashing twice, stop the interval and clear the columns
+    if (flashCount >= 7) {
+      clearInterval(flashInterval);
+
+      // Clear the columns
+      columns.forEach(x => {
+        contributionArray.forEach(row => {
+          const tile = row[x];
+          if (tile) {
+            tile.setAttribute('data-level', '0');
+          }
+        });
+      });
+
+      // Shift columns left by shiftCount
+      shiftColumnsLeft(columns);
+    }
+  }, 150); // Flash every 300ms
+};
+
+// Function to shift only the columns to the right of cleared columns
+const shiftColumnsLeft = (clearedColumns) => {
+  // Find the smallest cleared column index
+  const startShiftIndex = Math.min(...clearedColumns);
+
+  // Shift columns to the right of the cleared columns
+  for (let x = startShiftIndex; x < 51; x++) {
     for (let y = 0; y < 7; y++) {
-      const currentTile = contributionArray[y]?.[x + 1];
+      const currentTile = contributionArray[y]?.[x + shiftCount]; // Shift by shiftCount
       const nextTile = contributionArray[y]?.[x];
 
-      if (currentTile) {
-        nextTile.setAttribute('data-level', currentTile.getAttribute('data-level'));
+      if (currentTile && currentTile.getAttribute('data-level') === '2') {
+        nextTile.setAttribute('data-level', '2');
       } else {
         nextTile.setAttribute('data-level', '0');
       }
     }
   }
 };
+
+
 
 // Function to move the tetromino left (falling sideways)
 const moveTetromino = () => {
@@ -175,9 +228,6 @@ const moveTetromino = () => {
     });
 
     // After landing, check and clear full columns and shift left
-    clearFullColumns();
-    clearFullColumns();
-    clearFullColumns();
     clearFullColumns();
 
     // Spawn a new tetromino
@@ -208,9 +258,6 @@ const dropTetrominoLeft = () => {
   });
 
   // After landing, check and clear full columns and shift left
-  clearFullColumns();
-  clearFullColumns();
-  clearFullColumns();
   clearFullColumns();
 
   // Spawn a new tetromino
@@ -304,7 +351,7 @@ const moveTetrominoVertically = (direction) => {
 
 
 
-// Add event listeners for vertical movement keys
+// Add event listeners for input keys
 document.addEventListener('keydown', (event) => {
   event.preventDefault(); // Removes the default keyboard actions from the page.
   // NOTE: There would be no way to restore default keyboard actions other than refreshing the page
@@ -319,30 +366,25 @@ document.addEventListener('keydown', (event) => {
   }
   
   switch (input) {
-	case 'ArrowUp':
-    case 't':
+    case 'w':
       moveTetrominoVertically('up'); // Move up
       break;
-	case 'ArrowDown':
-    case 'g':
+    case 's':
       moveTetrominoVertically('down'); // Move down
       break;
-	case 'ArrowLeft':
-    case 'x':
+    case ' ':
       dropTetrominoLeft(); // Trigger instant left drop
       break;
-    case 'f':
+    case 'a':
       rotateTetromino('counterclockwise'); // Rotate counterclockwise
       break;
-    case 'h':
+    case 'd':
       rotateTetromino('clockwise'); // Rotate clockwise
       break;
   }
-});
-
-
+}, true);
 
 // Start the game
 spawnTetromino();
-setInterval(moveTetromino, 150); // Move the tetromino every 500ms
+setInterval(moveTetromino, 150); // Move the tetromino every 150
 
