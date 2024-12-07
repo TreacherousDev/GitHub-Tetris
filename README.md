@@ -1,17 +1,17 @@
 # GitHub-Tetris
-![12061-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/a8352e99-5010-466a-a1ec-0e6a59cbea10)  
-GitHub Tetris is a Browser Extension that lets you play Tetris on your GitHub Contribution Graph  
-This resource is still pending for approval at Mozilla Extension Marketplace. For now, plase refer to the build instructions below.
+![2024-12-0709-48-27-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/67c6fa9c-8185-443e-9eac-8243e6da53bf)  
+GitHub Tetris is a Browser Extension that lets you play Tetris on your GitHub Contribution Graph.  
+Get this now for Firefox from the [Mozilla Extension Marketplace](https://addons.mozilla.org/en-US/firefox/addon/github-tetris-game/)
 
 ## How to Play
 Standard Tetris rules apply. The game automatically checks for full columns, clears them, and shifts the remaining blocks to the left. The player can also trigger an instant left drop of the tetromino. A loss is determined when there is no more space to spawn more tetrominoes.  
 
 ### Controls: 
-Rotate Clockwise: (H)  
-Rotate Counterclockwise: (F)  
-Move up: (T)  
-Move down: (G)  
-Instant Drop: (X)    
+Rotate Clockwise: (D)  
+Rotate Counterclockwise: (A)  
+Move up: (W)  
+Move down: (S)  
+Instant Drop: (Space)    
 
 To start a new game, simply refresh the browser page and rerun the extension.
 
@@ -32,7 +32,7 @@ With that said, here is how to build it yourself:
 2. Open your Chromium web browser and click on `Extensions` tab
 3. Enable `Developer Mode`
 4. Click on `Load Unpacked`
-5. Select the folder `GitHub-Tetris/GitHub-Tetris-Chromium`
+5. Select the folder `GitHub-Tetris-Chromium` you just unpacked
 6. Open a GitHub profile tab and activate the extension
 
 ___
