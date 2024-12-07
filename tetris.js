@@ -34,7 +34,7 @@ const tetrominoes = [
 let tetrominoBag = [];
 // Active tetromino state
 let activeTetromino = [];
-let position = { x: 46, y: 3 }; // Start from the right center
+let position = { x: 50, y: 3 }; // Start from the right center
 let gameOver = false;
 
 
@@ -60,6 +60,8 @@ const getNextTetromino = () => {
 
 
 const spawnTetromino = () => {
+  // Spawn a new tetromino
+  position = { x: 50, y: 3 }; // Reset position
   const randomIndex = getNextTetromino(); // Use fair distribution
   activeTetromino = tetrominoes[randomIndex].map(block => ({
     x: position.x + block.x,
@@ -230,8 +232,6 @@ const moveTetromino = () => {
     // After landing, check and clear full columns and shift left
     clearFullColumns();
 
-    // Spawn a new tetromino
-    position = { x: 51, y: 3 }; // Reset position
     spawnTetromino();
   }
 };
@@ -261,7 +261,6 @@ const dropTetrominoLeft = () => {
   clearFullColumns();
 
   // Spawn a new tetromino
-  position = { x: 51, y: 3 }; // Reset position
   spawnTetromino();
 };
 
@@ -367,18 +366,23 @@ document.addEventListener('keydown', (event) => {
   
   switch (input) {
     case 'w':
+    case 'ArrowUp':
       moveTetrominoVertically('up'); // Move up
       break;
     case 's':
+    case 'ArrowDown':
       moveTetrominoVertically('down'); // Move down
       break;
     case ' ':
+    case 'Enter':
       dropTetrominoLeft(); // Trigger instant left drop
       break;
     case 'a':
+    case 'ArrowLeft':
       rotateTetromino('counterclockwise'); // Rotate counterclockwise
       break;
     case 'd':
+    case 'ArrowRight':
       rotateTetromino('clockwise'); // Rotate clockwise
       break;
   }
