@@ -7,11 +7,13 @@ Get this now for Firefox from the [Mozilla Extension Marketplace](https://addons
 Standard Tetris rules apply. The game automatically checks for full columns, clears them, and shifts the remaining blocks to the left. The player can also trigger an instant left drop of the tetromino. A loss is determined when there is no more space to spawn more tetrominoes.  
 
 ### Controls: 
-Rotate Clockwise: (D)  
-Rotate Counterclockwise: (A)  
-Move up: (W)  
-Move down: (S)  
-Instant Drop: (Space)    
+| **Action**          | **Key**            |
+|----------------------|--------------------|
+| Move up              | `W` or `↑`        |
+| Move down            | `S` or `↓`        |
+| Rotate Clockwise     | `D` or `→`        |
+| Rotate Counterclockwise | `A` or `←`    |
+| Instant Drop         | `Space` or `Enter`|
 
 To start a new game, simply refresh the browser page and rerun the extension.
 
