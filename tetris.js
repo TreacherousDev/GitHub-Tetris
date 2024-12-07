@@ -118,13 +118,9 @@ const clearTetromino = () => {
 
 
 
-// Variable to track how many columns need to be shifted left
-let shiftCount = 0;
 
 // Function to clear full columns with flashing effect
 const clearFullColumns = () => {
-  // Reset shiftCount
-  shiftCount = 0;
 
   // Array to store the indices of full columns
   const fullColumns = [];
@@ -136,11 +132,8 @@ const clearFullColumns = () => {
     
     if (isFullColumn) {
       fullColumns.push(x);
-      shiftCount++;
     }
   }
-
-  if (shiftCount === 0) return; // No columns to clear
 
   // Flash full columns before clearing
   flashColumns(fullColumns);
@@ -185,25 +178,32 @@ const flashColumns = (columns) => {
   }, 150); // Flash every 300ms
 };
 
-// Function to shift only the columns to the right of cleared columns
+// Function to shift columns individually for each cleared column
 const shiftColumnsLeft = (clearedColumns) => {
-  // Find the smallest cleared column index
-  const startShiftIndex = Math.min(...clearedColumns);
+  // Sort cleared columns in descending order (rightmost first)
+  clearedColumns.sort((a, b) => b - a);
 
-  // Shift columns to the right of the cleared columns
-  for (let x = startShiftIndex; x < 51; x++) {
-    for (let y = 0; y < 7; y++) {
-      const currentTile = contributionArray[y]?.[x + shiftCount]; // Shift by shiftCount
-      const nextTile = contributionArray[y]?.[x];
+  // Process each cleared column
+  clearedColumns.forEach(clearedColumn => {
+    // Shift columns to the right of the cleared column left by 1
+    for (let x = clearedColumn; x < 51; x++) {
+      for (let y = 0; y < 7; y++) {
+        const currentTile = contributionArray[y]?.[x + 1]; // Tile to the right
+        const nextTile = contributionArray[y]?.[x]; // Current column tile
 
-      if (currentTile && currentTile.getAttribute('data-level') === '2') {
-        nextTile.setAttribute('data-level', '2');
-      } else {
-        nextTile.setAttribute('data-level', '0');
+        if (currentTile && currentTile.getAttribute('data-level') === '2') {
+          nextTile.setAttribute('data-level', '2'); // Move block left
+        } else {
+          nextTile.setAttribute('data-level', '0'); // Clear current tile
+        }
       }
     }
-  }
+  });
 };
+
+
+
+
 
 
 
