@@ -1,7 +1,8 @@
 # GitHub-Tetris
 ![2024-12-0709-48-27-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/67c6fa9c-8185-443e-9eac-8243e6da53bf)  
 GitHub Tetris is a Browser Extension that lets you play Tetris on your GitHub Contribution Graph.  
-Get this now for Firefox from the [Mozilla Extension Marketplace](https://addons.mozilla.org/en-US/firefox/addon/github-tetris-game/)
+Get this now for Firefox from the [Mozilla Extension Marketplace](https://addons.mozilla.org/en-US/firefox/addon/github-tetris-game/)  
+Also check out [GitHub Snake](https://github.com/TreacherousDev/GitHub-Snake)!
 
 ## How to Play
 Standard Tetris rules apply. The game automatically checks for full columns, clears them, and shifts the remaining blocks to the left. The player can also trigger an instant left drop of the tetromino. A loss is determined when there is no more space to spawn more tetrominoes.  
